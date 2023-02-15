@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTable } from 'react-table';
-import { Text } from 'components/ui/core';
+import { Text, StyledTable } from 'components/ui/core';
 import type { Column } from 'react-table';
 import type { Transaction } from 'types';
 import { formatDate, formatNumberToCurrency } from 'helpers';
@@ -31,9 +31,17 @@ export const Table = React.memo(({ transactionData }: Props) => {
           accessor: 'Ledger',
         },
         {
-          Header: () => <Text>{formatNumberToCurrency(totalAmount)}</Text>,
+          Header: () => (
+            <Text tag="div" textAlign="right">
+              {formatNumberToCurrency(totalAmount)}
+            </Text>
+          ),
           accessor: 'Amount',
-          Cell: ({ value }) => formatNumberToCurrency(Number(value)),
+          Cell: ({ value }) => (
+            <Text tag="div" textAlign="right">
+              {formatNumberToCurrency(Number(value))}
+            </Text>
+          ),
         },
       ] as Column<Transaction>[],
     []
@@ -45,7 +53,7 @@ export const Table = React.memo(({ transactionData }: Props) => {
     tableInstance;
 
   return (
-    <table {...getTableProps()}>
+    <StyledTable {...getTableProps()}>
       <thead>
         {headerGroups.map((headerGroup) => (
           <tr {...headerGroup.getHeaderGroupProps()}>
@@ -68,6 +76,6 @@ export const Table = React.memo(({ transactionData }: Props) => {
           );
         })}
       </tbody>
-    </table>
+    </StyledTable>
   );
 });

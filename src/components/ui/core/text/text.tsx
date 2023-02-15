@@ -14,11 +14,21 @@ export type TextProps = {
    * @defaultValue 'span'
    */
   tag?: 'span' | 'div' | 'p';
+  /**
+   * text align for div
+   * @defaultValue 'left'
+   */
+  textAlign?: 'left' | 'right';
 };
 
-export const Text = ({ children, bold = false, tag = 'span' }: TextProps) => {
+export const Text = ({
+  children,
+  bold = false,
+  tag = 'span',
+  textAlign = 'left',
+}: TextProps) => {
   return (
-    <Styled.Container bold={bold} as={tag}>
+    <Styled.Container bold={bold} as={tag} textAlign={textAlign}>
       {children}
     </Styled.Container>
   );

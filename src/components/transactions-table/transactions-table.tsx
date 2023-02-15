@@ -9,15 +9,11 @@ export const TransactionsTable = () => {
   const isLoading = transactions.some((t) => t.isLoading);
 
   if (isLoading) return <Loading />;
+
   const transactionData = transactions.reduce((acc, current) => {
     acc = [...acc, ...(current.data?.data.transactions || [])];
     return acc;
   }, [] as Transaction[]);
-  console.log(transactions, transactionData);
 
-  return (
-    <>
-      <Table transactionData={transactionData} />
-    </>
-  );
+  return <Table transactionData={transactionData} />;
 };

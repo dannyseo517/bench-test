@@ -3,18 +3,24 @@ import { useTable } from 'react-table';
 import { Text } from 'components/ui/core';
 import type { Column } from 'react-table';
 import type { Transaction } from 'types';
+import { formatDate, formatNumberToCurrency } from 'helpers';
 
 type Props = {
   transactionData: Transaction[];
 };
 
 export const Table = React.memo(({ transactionData }: Props) => {
+  const totalAmount = transactionData.reduce(
+    (acc, current) => (acc += Number(current.Amount)),
+    0
+  );
   const columns = React.useMemo(
     () =>
       [
         {
           Header: () => <Text>Date</Text>,
           accessor: 'Date',
+          Cell: ({ value }) => formatDate(value),
         },
         {
           Header: () => <Text>Company</Text>,
@@ -25,8 +31,9 @@ export const Table = React.memo(({ transactionData }: Props) => {
           accessor: 'Ledger',
         },
         {
-          Header: () => <Text>Amount</Text>,
+          Header: () => <Text>{formatNumberToCurrency(totalAmount)}</Text>,
           accessor: 'Amount',
+          Cell: ({ value }) => formatNumberToCurrency(Number(value)),
         },
       ] as Column<Transaction>[],
     []

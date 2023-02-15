@@ -1,31 +1,38 @@
 import React from 'react';
 import { useTable } from 'react-table';
 import { Text } from 'components/ui/core';
+import type { Column } from 'react-table';
+import type { Transaction } from 'types';
 
-export const Table = React.memo(() => {
+type Props = {
+  transactionData: Transaction[];
+};
+
+export const Table = React.memo(({ transactionData }: Props) => {
   const columns = React.useMemo(
-    () => [
-      {
-        Header: () => <Text>Date</Text>,
-        accessor: 'Date',
-      },
-      {
-        Header: () => <Text>Company</Text>,
-        accessor: 'Company',
-      },
-      {
-        Header: () => <Text>Account</Text>,
-        accessor: 'Ledger',
-      },
-      {
-        Header: () => <Text>Amount</Text>,
-        accessor: 'Amount',
-      },
-    ],
+    () =>
+      [
+        {
+          Header: () => <Text>Date</Text>,
+          accessor: 'Date',
+        },
+        {
+          Header: () => <Text>Company</Text>,
+          accessor: 'Company',
+        },
+        {
+          Header: () => <Text>Account</Text>,
+          accessor: 'Ledger',
+        },
+        {
+          Header: () => <Text>Amount</Text>,
+          accessor: 'Amount',
+        },
+      ] as Column<Transaction>[],
     []
   );
-  const tableData = React.useMemo(() => [], []);
-  const tableInstance = useTable({ columns: [], data: tableData });
+  const data = React.useMemo(() => transactionData, []);
+  const tableInstance = useTable({ columns, data });
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     tableInstance;

@@ -1,11 +1,17 @@
 import React from 'react';
 import { useGetTransactions } from 'api/queries';
+import { Table } from './table';
+import { Loading } from 'components/ui/core';
 
 export const TransactionsTable = () => {
-  const { isLoading, data } = useGetTransactions(1);
+  const transactions = useGetTransactions();
+  const isLoading = transactions.some((t) => t.isLoading);
 
-  // TODO
-  console.log(isLoading, data);
+  if (isLoading) return <Loading />;
 
-  return <div>test ya</div>;
+  return (
+    <>
+      <Table />
+    </>
+  );
 };

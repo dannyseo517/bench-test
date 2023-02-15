@@ -11,7 +11,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx', 'json'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx', 'json', 'svg'],
     modules: ['src', 'node_modules'],
     alias: {
       src: path.resolve(__dirname, 'src'),
@@ -27,6 +27,11 @@ module.exports = {
           target: 'es2015',
         },
         exclude: /node_modules/,
+      },
+      {
+        test: /\.svg$/i,
+        issuer: /\.[jt]sx?$/,
+        use: ['@svgr/webpack'],
       },
     ],
   },

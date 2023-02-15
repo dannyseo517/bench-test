@@ -9,7 +9,7 @@ type Props = {
   transactionData: Transaction[];
 };
 
-export const Table = React.memo(({ transactionData }: Props) => {
+export const TransactionsTable = React.memo(({ transactionData }: Props) => {
   const totalAmount = transactionData.reduce(
     (acc, current) => (acc += Number(current.Amount)),
     0
@@ -18,27 +18,27 @@ export const Table = React.memo(({ transactionData }: Props) => {
     () =>
       [
         {
-          Header: () => <Text>Date</Text>,
+          Header: () => <Text bold>Date</Text>,
           accessor: 'Date',
           Cell: ({ value }) => formatDate(value),
         },
         {
-          Header: () => <Text>Company</Text>,
+          Header: () => <Text bold>Company</Text>,
           accessor: 'Company',
         },
         {
-          Header: () => <Text>Account</Text>,
+          Header: () => <Text bold>Account</Text>,
           accessor: 'Ledger',
         },
         {
           Header: () => (
-            <Text tag="div" textAlign="right">
+            <Text tag="div" textAlign="right" bold>
               {formatNumberToCurrency(totalAmount)}
             </Text>
           ),
           accessor: 'Amount',
           Cell: ({ value }) => (
-            <Text tag="div" textAlign="right">
+            <Text tag="div" textAlign="right" bold>
               {formatNumberToCurrency(Number(value))}
             </Text>
           ),
@@ -46,7 +46,7 @@ export const Table = React.memo(({ transactionData }: Props) => {
       ] as Column<Transaction>[],
     []
   );
-  const data = React.useMemo(() => transactionData, []);
+  const data = React.useMemo(() => transactionData, [transactionData]);
   const tableInstance = useTable({ columns, data });
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =

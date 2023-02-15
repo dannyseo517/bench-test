@@ -2,7 +2,7 @@ import React from 'react';
 import { Text } from 'components/ui/core';
 import * as Styled from './app.styled';
 import { Header } from 'components/ui/core/header';
-import { TransactionsTable } from 'components/transactions-table';
+import { Transactions } from 'components/transactions';
 
 export const App = () => (
   <>
@@ -10,7 +10,7 @@ export const App = () => (
       <Text>Bench Test</Text>
     </Header>
     <Styled.PageContainer>
-      <TransactionsTable />
+      <Transactions />
     </Styled.PageContainer>
   </>
 );

@@ -1,10 +1,10 @@
 import React from 'react';
 import { useGetTransactions } from 'api/queries';
-import { Table } from './table';
+import { TransactionsTable } from './transactions-table';
 import { Loading } from 'components/ui/core';
 import type { Transaction } from 'types';
 
-export const TransactionsTable = () => {
+export const Transactions = () => {
   const transactions = useGetTransactions();
   const isLoading = transactions.some((t) => t.isLoading);
 
@@ -15,5 +15,5 @@ export const TransactionsTable = () => {
     return acc;
   }, [] as Transaction[]);
 
-  return <Table transactionData={transactionData} />;
+  return <TransactionsTable transactionData={transactionData} />;
 };

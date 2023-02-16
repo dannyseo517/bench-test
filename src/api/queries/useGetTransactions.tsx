@@ -15,6 +15,10 @@ type TransactionResponse = {
 const fetchTransaction = async (pageNumber: number) =>
   await ApiClient.get<TransactionResponse>(`/transactions/${pageNumber}.json`);
 
+/**
+ * calculates how many pages we need to call then uses useQueries to fetch them all
+ * @returns UseQueryResult<AxiosResponse<TransactionResponse>>
+ */
 export const useGetTransactions = (): UseQueryResult<
   AxiosResponse<TransactionResponse, any>
 >[] => {

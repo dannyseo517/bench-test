@@ -3,9 +3,20 @@ import React, { ReactElement } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'components/ui/theme';
+import { QueryClientProvider, QueryClient } from 'react-query';
 
-const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
-  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+const queryClient = new QueryClient();
+
+export const AllTheProviders = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    </QueryClientProvider>
+  );
 };
 
 const customRender = (

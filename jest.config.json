@@ -1,7 +1,8 @@
 {
   "testEnvironment": "jsdom",
   "transform": {
-    "^.+\\.tsx?$": "esbuild-jest"
+    "^.+\\.tsx?$": "esbuild-jest",
+    "^.+\\.svg$": "jest-transformer-svg"
   },
   "moduleDirectories": ["node_modules", "utils", "src"]
 }

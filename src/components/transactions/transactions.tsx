@@ -7,7 +7,6 @@ import { useErrorHandler } from 'react-error-boundary';
 
 export const Transactions = () => {
   const transactions = useGetTransactions();
-  console.log(transactions);
   const isLoading =
     transactions.length === 0 ? true : transactions.some((t) => t.isLoading);
   const hasError = transactions.some((t) => t.isError);

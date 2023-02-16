@@ -7,7 +7,9 @@ import { useErrorHandler } from 'react-error-boundary';
 
 export const Transactions = () => {
   const transactions = useGetTransactions();
-  const isLoading = transactions.some((t) => t.isLoading);
+  console.log(transactions);
+  const isLoading =
+    transactions.length === 0 ? true : transactions.some((t) => t.isLoading);
   const hasError = transactions.some((t) => t.isError);
   const handleError = useErrorHandler();
 
@@ -17,15 +19,12 @@ export const Transactions = () => {
     }
   }, [hasError]);
 
+  if (isLoading) return <Loading />;
+
   const transactionData = transactions.reduce((acc, current) => {
     acc = [...acc, ...(current.data?.data.transactions || [])];
     return acc;
   }, [] as Transaction[]);
 
-  return (
-    <>
-      <TransactionsTable transactionData={transactionData} />
-      {isLoading && <Loading />}
-    </>
-  );
+  return <TransactionsTable transactionData={transactionData} />;
 };

@@ -44,7 +44,7 @@ export const TransactionsTable = React.memo(({ transactionData }: Props) => {
           ),
         },
       ] as Column<Transaction>[],
-    []
+    [totalAmount]
   );
   const data = React.useMemo(() => transactionData, [transactionData]);
   const tableInstance = useTable({ columns, data });

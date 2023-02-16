@@ -17,12 +17,15 @@ export const Transactions = () => {
     }
   }, [hasError]);
 
-  if (isLoading) return <Loading />;
-
   const transactionData = transactions.reduce((acc, current) => {
     acc = [...acc, ...(current.data?.data.transactions || [])];
     return acc;
   }, [] as Transaction[]);
 
-  return <TransactionsTable transactionData={transactionData} />;
+  return (
+    <>
+      <TransactionsTable transactionData={transactionData} />
+      {isLoading && <Loading />}
+    </>
+  );
 };

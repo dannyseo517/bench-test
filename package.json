@@ -1,12 +1,16 @@
 {
   "name": "secret-project-stuff",
   "version": "1.0.0",
-  "repository": "https://github.com/dannyseo517/secret-project-stuff.git",
+  "repository": {
+    "url": "git+https://github.com/dannyseo517/secret-project-stuff.git"
+  },
   "author": "Danny Seo <dannyseo517@gmail.com>",
   "license": "MIT",
   "scripts": {
     "start": "yarn webpack serve",
     "build": "webpack --color --progress",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d dist",
     "test": "yarn run jest"
   },
   "dependencies": {
@@ -39,6 +43,7 @@
     "eslint-plugin-react": "^7.28.0",
     "eslint-plugin-react-hooks": "^4.3.0",
     "fork-ts-checker-webpack-plugin": "^7.3.0",
+    "gh-pages": "^5.0.0",
     "html-webpack-plugin": "^5.5.0",
     "jest": "^29.4.2",
     "jest-environment-jsdom": "^29.4.2",

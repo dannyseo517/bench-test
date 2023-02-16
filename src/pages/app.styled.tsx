@@ -4,4 +4,6 @@ export const PageContainer = styled.div`
   padding: 40px;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
